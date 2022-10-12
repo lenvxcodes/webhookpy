@@ -1,4 +1,5 @@
 {
+    "prefix": "webhook",
     "hi": "``Hello world!``",
     "bye": "``Bye world.``"
 }
