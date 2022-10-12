@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+##!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Webhook.py"""
 #IMPORTS
@@ -66,6 +66,16 @@ def main() -> int:
         
         if msg == f"{prefix}.src":
             DiscordWebhook(url=WEBHOOK_URI, rate_limit_retry=True, content="https://github.com/lenvxcodes/webhookpy").execute()
+            continue
+
+        if msg == f"{prefix}.help":
+            print("""
+            FIND.preifx - prints out ur prefix.
+            urprefix.logout - logs out and prints ur bye message, if is it null it does not print.
+            urpreifx.range - spams, "u can get ip banned -ari" stay safe.
+            urprefix.src - if u want to print out my github link to webhook.py
+            urprefix.help - for list of the commands (Used)
+            """)
             continue
         
         DiscordWebhook(url=WEBHOOK_URI, rate_limit_retry=True, content=msg).execute()
