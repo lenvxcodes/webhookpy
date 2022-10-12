@@ -6,8 +6,7 @@ python3 webhook with custom things!
 
 # Modifying config.json is easy.
 - set ur own things.
-- u can set hello and bye messages as NULL without ""
-
+- u can set hello and bye messages as NULL without "" to not send them
 # Commands:
  ```
  FIND.preifx - prints out ur prefix.
