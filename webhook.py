@@ -100,6 +100,7 @@ def main() -> int:
             urpreifx.range - spams, "u can get ip banned -ari" stay safe.
             urprefix.src - if u want to print out my github link to webhook.py
             urprefix.help - for list of the commands (Used)
+            urprefix.quit - quits script with a bye message
             """)
             continue
         
