@@ -1,6 +1,5 @@
-##!/usr/bin/env python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# I hope u like this update
 """Webhook.py"""
 #IMPORTS
 import sys
@@ -20,8 +19,9 @@ with open("web.json", "r") as hok:
 prefix = config['prefix']
 bye_message = config['bye']
 hi_message = config['hi']
+webhookrn = '1'
 
-#WEBHOOK JSON PORT
+#WEBHOOK JSON PORT DEF
 print(f"{Fore.RED} Would u like to import a webhook?")
 yn =input("Y/n: ")
 if yn == "Y":
@@ -38,7 +38,26 @@ if yn == "N":
 if yn == "n":
     print(Fore.RESET)
     webhookrn =input(f"{Fore.BLUE}webwook:{Fore.RESET}")
-
+#LOGIN
+def login(): 
+    print(f"{Fore.RED} Would u like to import a webhook?")
+    yn =input("Y/n: ")
+    if yn == "Y":
+        print("Type out value. 'web.json'")
+        webhookput=input("value: ")
+        webhookrn = web["replaceme".replace("replaceme", webhookput)]
+    if yn == "y":
+        print("Type out value. 'web.json'")
+        webhookput=input("value: ")
+        webhookrn = web["replaceme".replace("replaceme", webhookput)]
+    if yn == "N":
+        print(Fore.RESET)
+        webhookrn =input(f"{Fore.BLUE}webwook:{Fore.RESET}")
+        WEBHOOK_URI: str = webhookrn  
+    if yn == "n":
+        print(Fore.RESET)
+        webhookrn =input(f"{Fore.BLUE}webwook:{Fore.RESET}")
+        WEBHOOK_URI: str = webhookrn  
 WEBHOOK_URI: str = webhookrn    
 
 def main() -> int:
@@ -52,7 +71,12 @@ def main() -> int:
             DiscordWebhook(url=WEBHOOK_URI, rate_limit_retry=True, content=bye_message).execute()
             print("Logged out.")
             print(Fore.RESET)
+            login()
+
+        if msg == f"{prefix}.quit":
+            DiscordWebhook(url=WEBHOOK_URI, rate_limit_retry=True, content=bye_message).execute()
             exit()
+            
         if msg == f"{prefix}.range":
             print("spam:")
             msg = input("message: ")
