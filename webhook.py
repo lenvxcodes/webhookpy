@@ -8,6 +8,8 @@ from colorama import Fore
 import ujson
 import readline
 from discord_webhook import DiscordWebhook  # type: ignore
+from discordwebhook import Discord
+from random import randint
 
 #UJSON
 with open("config.json", "r") as cfg:
@@ -20,6 +22,11 @@ prefix = config['prefix']
 bye_message = config['bye']
 hi_message = config['hi']
 webhookrn = '1'
+lucktip = randint(0, 50)
+luck = lucktip
+
+if luck == 45:
+    print(f"{Fore.YELLOW}Fun Fact{Fore.RESET}: Ur got lucky today! U got the rare message. Hope ur having a great day.")
 
 #WEBHOOK JSON PORT DEF
 print(f"{Fore.RED} Would u like to import a webhook?")
@@ -59,14 +66,14 @@ def login():
         webhookrn =input(f"{Fore.BLUE}webwook:{Fore.RESET}")
         WEBHOOK_URI: str = webhookrn  
 WEBHOOK_URI: str = webhookrn    
-
+discord = Discord(url=webhookrn)
 def main() -> int:
     """Entry/main function"""
     DiscordWebhook(url=WEBHOOK_URI, rate_limit_retry=True, content=hi_message).execute()
     while True:
         if not (msg := input(f"{Fore.RED}Message:{Fore.RESET} ")).strip():
             continue
-        
+
         if msg == f"{prefix}.logout":
             DiscordWebhook(url=WEBHOOK_URI, rate_limit_retry=True, content=bye_message).execute()
             print("Logged out.")
@@ -76,7 +83,7 @@ def main() -> int:
         if msg == f"{prefix}.quit":
             DiscordWebhook(url=WEBHOOK_URI, rate_limit_retry=True, content=bye_message).execute()
             exit()
-            
+
         if msg == f"{prefix}.range":
             print("spam:")
             msg = input("message: ")
@@ -94,15 +101,35 @@ def main() -> int:
             continue
 
         if msg == f"{prefix}.help":
-            print("""
-            FIND.preifx - prints out ur prefix.
-            urprefix.logout - logs out and prints ur bye message, if is it null it does not print.
-            urpreifx.range - spams, "u can get ip banned -ari" stay safe.
-            urprefix.src - if u want to print out my github link to webhook.py
-            urprefix.help - for list of the commands (Used)
-            urprefix.quit - quits script with a bye message
+            print(f"""
+            {Fore.YELLOW + prefix + Fore.RESET} - prints out ur prefix.
+            {Fore.YELLOW + prefix + Fore.RESET}.logout - logs out and prints ur bye message, if is it null it does not print.
+            {Fore.YELLOW + prefix + Fore.RESET}.range - spams, "u can get ip banned -ari" stay safe.
+            {Fore.YELLOW + prefix + Fore.RESET}.src - if u want to print out my github link to webhook.py
+            {Fore.YELLOW + prefix + Fore.RESET}.help - for list of the commands (Used)
+            {Fore.YELLOW + prefix + Fore.RESET}.quit - quits script with a bye message
             """)
             continue
+
+        if msg == f"{prefix}.embed":
+            print(f"{Fore.RED}Embed Edior{Fore.RESET}")
+            titleembed=input("Title:")
+            contentembed=input("Content:")
+            discord.post(embeds=[{"title": titleembed, "description": contentembed}],)
+            continue
+        
+        if msg == f"{prefix}":
+            print(f"Usage: {Fore.YELLOW + prefix + Fore.YELLOW}.[COMMAND]") 
+            continue
+
+        if msg == f"{prefix}.":
+            print(f"Usage: {Fore.YELLOW + prefix + Fore.YELLOW}.[COMMAND]") 
+            continue
+
+        if f"{prefix}." in msg:
+            print(f"{Fore.RED}INVALID COMMAND{Fore.RESET}. Use {prefix}.help for list of comamnds.") 
+            continue
+
         
         DiscordWebhook(url=WEBHOOK_URI, rate_limit_retry=True, content=msg).execute()
 
