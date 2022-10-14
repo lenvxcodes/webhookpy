@@ -3,6 +3,7 @@
 """Webhook.py"""
 #IMPORTS
 import sys
+import os
 from warnings import filterwarnings as filter_warnings
 from colorama import Fore
 import ujson
@@ -47,7 +48,8 @@ if yn == "n":
     webhookrn =input(f"{Fore.BLUE}webwook:{Fore.RESET}")
 #LOGIN
 def login(): 
-    print(f"{Fore.RED} Would u like to import a webhook?")
+    msg = None
+    print(f"{Fore.RED} Would u like to import a webhook?".strip())
     yn =input("Y/n: ")
     if yn == "Y":
         print("Type out value. 'web.json'")
@@ -102,11 +104,13 @@ def main() -> int:
 
         if msg == f"{prefix}.help":
             print(f"""
-            {Fore.YELLOW + prefix + Fore.RESET} - prints out ur prefix.
+            {Fore.YELLOW + FIND + Fore.RESET}.prefix - prints out ur prefix.
             {Fore.YELLOW + prefix + Fore.RESET}.logout - logs out and prints ur bye message, if is it null it does not print.
             {Fore.YELLOW + prefix + Fore.RESET}.range - spams, "u can get ip banned -ari" stay safe.
             {Fore.YELLOW + prefix + Fore.RESET}.src - if u want to print out my github link to webhook.py
             {Fore.YELLOW + prefix + Fore.RESET}.help - for list of the commands (Used)
+            {Fore.YELLOW + prefix + Fore.RESET}.pic - Sends a file. in files folder.
+            {Fore.YELLOW + prefix + Fore.RESET}.embed - embed message
             {Fore.YELLOW + prefix + Fore.RESET}.quit - quits script with a bye message
             """)
             continue
@@ -118,6 +122,16 @@ def main() -> int:
             discord.post(embeds=[{"title": titleembed, "description": contentembed}],)
             continue
         
+        if msg == f"{prefix}.pic":
+            print("Type the files name Example: helloworld.png")
+            fileok=input("pic.")
+            discord.post(file={"webhookpy": open(f"files/{fileok}", "rb")})
+            os.system('clear')
+            print(f"Posted {fileok}")
+            continue
+
+            
+            
         if msg == f"{prefix}":
             print(f"Usage: {Fore.YELLOW + prefix + Fore.YELLOW}.[COMMAND]") 
             continue
@@ -130,7 +144,6 @@ def main() -> int:
             print(f"{Fore.RED}INVALID COMMAND{Fore.RESET}. Use {prefix}.help for list of comamnds.") 
             continue
 
-        
         DiscordWebhook(url=WEBHOOK_URI, rate_limit_retry=True, content=msg).execute()
 
     return 0
