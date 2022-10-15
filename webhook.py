@@ -104,7 +104,7 @@ def main() -> int:
 
         if msg == f"{prefix}.help":
             print(f"""
-            {Fore.YELLOW + FIND + Fore.RESET}.prefix - prints out ur prefix.
+            {Fore.YELLOW + "FIND" + Fore.RESET}.prefix - prints out ur prefix.
             {Fore.YELLOW + prefix + Fore.RESET}.logout - logs out and prints ur bye message, if is it null it does not print.
             {Fore.YELLOW + prefix + Fore.RESET}.range - spams, "u can get ip banned -ari" stay safe.
             {Fore.YELLOW + prefix + Fore.RESET}.src - if u want to print out my github link to webhook.py
